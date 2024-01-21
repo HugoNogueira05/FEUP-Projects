@@ -5,5 +5,5 @@ Every project has in it's file the starting date aswell as everyone who took par
 Everyone is free to use every code to help in their own projects, but beware that straight plagerism is neither correct nor a good way to learn coding.
 I will try to explain every thought process behind the code and try to document it while doing so, to help someone that might be looking for help in that specific topic.
 > [!NOTE]
-> Any sugestions/ help that mighty want to communicate, please use my email: hugonogueira055@gmail.com
+> Any sugestions/ help that you might want to communicate, please use my email: hugonogueira055@gmail.com
 
