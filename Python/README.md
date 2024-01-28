@@ -30,11 +30,11 @@ After implementing powers the odds might change.
 1. Fixed some edge-cases
 2. Improved outputs to better understand what is happening
 ## Development Objectives
-[x] Creating Main mechanics
-[x] Fixing outputs
-[ ] Improving "AI"
-[ ] Adding powers
-[ ] Creating levels
+- [x] Creating Main mechanics
+- [x] Fixing outputs
+- [ ] Improving "AI"
+- [ ] Adding powers
+- [ ] Creating levels
 # How to run:
 > [!IMPORTANT]
 > Make sure you have git and python3 instaled before following the next steps otherwise the game won't run
