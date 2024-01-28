@@ -21,3 +21,38 @@ Therefore the main mechanics are:
 As stated before the "AI" is nothing more than an algorithm that calculates odds based on knowledge that the player can also obtain it only counts the amount of blanks and real bullets and then calculates the odd of the next bullet being real.
 If the odd is 0.5 or above it chooses to shoot the player, else it chooses to shoot himself.
 After implementing powers the odds might change.
+# Development Roadmap
+## Version 1.0
+1. Added Core Mechanics 
+2. Created simple algorithm that simulates the "AI"
+3. Added the option to select how many lives the player wants (Might remove it later)
+## Version 1.1
+1. Fixed some edge-cases
+2. Improved outputs to better understand what is happening
+## Development Objectives
+[x] Creating Main mechanics
+[x] Fixing outputs
+[ ] Improving "AI"
+[ ] Adding powers
+[ ] Creating levels
+# How to run:
+> [!IMPORTANT]
+> Make sure you have git and python3 instaled before following the next steps otherwise the game won't run
+Running this commands will create a folder with the entire repository on your device, if do not wish to copy the entirety of the repository you can either follow this steps and delete the extra files or go to the webpage of this repository and download the specific file(s) you wish to run.
+
+Execute the following commands in your terminal:
+```
+git clone https://github.com/HugoNogueira05/FEUP-Projects.git
+```
+Using "cd directoryName" reach the directory that was created when you cloned the repository
+If you didnt change the path, the commands should be:
+```
+cd documents
+cd GitHub
+cd FEUP-Projects
+cd Python
+```
+After that, just write:
+```
+python RussianRoulette.py
+```
