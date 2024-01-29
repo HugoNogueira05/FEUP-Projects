@@ -56,9 +56,17 @@ flowchart TD
 ## Version 1.1
 1. Fixed some edge-cases
 2. Improved outputs to better understand what is happening
+## Version 1.2
+1. Improved input checking([@Helder Oliveira](https://github.com/hgoncalo))
+2. Created a new function to optimize input gathering
+3. Developed some functions to setup item functions for future updates
+4. Fixed bug related to who plays when AI was 1 HP
+5. Removed the raise exception when there was a wrong input, now you don't need to restart the entire game
+6. Remade the game function so that everytime the weapon reloads tu turn remains the same instead of it being always the player's turn (that was unfair)
 ## Development Objectives
 - [x] Creating Main mechanics
 - [x] Fixing outputs
+- [X] Improving inputs
 - [ ] Improving "AI"
 - [ ] Adding powers
 - [ ] Creating levels
@@ -83,3 +91,6 @@ After that, just write:
 ```
 python RussianRoulette.py
 ```
+# Development Participants:
+* Me (everything without the respective tag)
+* [@Helder Oliveira](https://github.com/hgoncalo)
