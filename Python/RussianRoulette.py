@@ -25,22 +25,15 @@ def main() -> None:
     time.sleep(3)
     print("Enough talk, let's begin...")
     time.sleep(1)
-    print('Input "me"/"Me" to shoot yourself or "you"/"You" to shoot me')
     bullets = [True, False]
-    play = input()
-    if play == "me" or play=="Me":
-        playAgain = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)) , "player")
+    turn = get_Input(bullets)
+    if turn:
+        turn = get_Input(bullets)
     else:
-        playAgain = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)), "ai")
-    if playAgain == True:
-        play = input()
-        if play == "me" or play=="Me":
-            playAgain = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)) , "player")
-        else:
-            playAgain = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)), "ai")
-    else:
-        AIShoot(bullets , bullets.pop(random.randint(0, len(bullets)-1)))
-    game()
+        turn = AIShoot(bullets , bullets.pop(random.randint(0, len(bullets)-1)))
+        
+        
+    Game(turn)
     
 
 
@@ -62,6 +55,7 @@ def PlayerShoot(bullet , target) -> bool:
                 return dead()
             elif playerLives == 1:
                 print(f"You shot yourself, I would be carefull you only have 1 more chance")
+                return False
             else:
                 print(f"You shot yourself, you now have {playerLives} chances left")
             return False
@@ -82,32 +76,29 @@ def PlayerShoot(bullet , target) -> bool:
                 print(f"You got it right but it's fine I still have {AILives} tries")
             return False
 """
-Loop that runs while neither the player nor the "AI" dies in the beginning of every round it reveals how many lives and blanks there are
+Loop that runs while neither the player nor the "AI" dies. In the beginning of every round it reveals how many real bullets and blanks there are
 """
-def game() -> None:
+def Game(turn) -> None:
     global running
+    items = {"reverse" : 0 , "kevlar" : 0}
     while running:
-        bullets = reload()
+        bullets = Reload()
         print(f"There are {bullets.count(True)} real bullets and {bullets.count(False)} blanks")
         time.sleep(1)
-        print("Go ahead and take the shot")
-        turn = True
+        if turn:
+            print("Go ahead and take the shot")
+        else:
+            print("Now I start")
         while len(bullets) != 0:
             if turn:
-                play = input()
-                if play == "me" or play == "Me":
-                    turn = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)) , "player")
-                elif play == "you" or play== "You":
-                    turn = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)) , "ai")
-                else:
-                    raise Exception('Input can only be "You/you" or "Me/me"')
+                turn = get_Input(bullets)
             else:
                 turn = AIShoot(bullets , bullets.pop(random.randint(0, len(bullets)-1)))
 
 """
 This function increments the amount of bullets by one while also making sure that there is always 1 live and 1 blank otherwise there would be cases where it would be a free round
 """
-def reload() -> list[bool]:
+def Reload() -> list[bool]:
     global runs
     bullets = []
     runs +=1
@@ -115,6 +106,48 @@ def reload() -> list[bool]:
     realBullets = [True for x in range(runs + 2 -len(blanks))]
     bullets = blanks + realBullets
     return bullets
+
+"""
+This function gets the user's input and filters it to the correct function after:
+"""
+
+def get_Input(bullets , items = {} , turn = True) -> bool:
+    print('Input "Me" to shoot yourself or "You" to shoot me')
+    userInput = str(input())
+    if userInput.upper() == "ME":
+        turn = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)) , "player")
+    elif userInput.upper() == "YOU":
+        turn = PlayerShoot(bullets.pop(random.randint(0, len(bullets)-1)) , "ai")
+    elif userInput.upper() == "ITEMS":
+        turn = item_Options(bullets , items)
+    else:
+        get_Input(bullets)
+    return turn
+    
+#Ideia é os items serem um dicionário em q a key é o nome do item e o valor associado é o número de uses que tens se for 0 , erro, senão baixa 1 
+def item_Options(bullets , items):
+    print("You have the following items")
+    print(items)
+    print("Input 1 to use them, 2 to get information about them or 3 to go back:")
+    if input() == 1:
+        itemPicked = input("Pick what item you wish to use")
+        if itemPicked in items.keys():
+            if items[itemPicked] >= 1:
+                items[itemPicked] -= 1
+
+            else:
+                print("You don't have that item at your disposal")
+        else:
+            print("Choose one of the available items")
+            item_Options(bullets , items)
+    elif input() == 2:
+        print("Please indicate the name of the item you want to learn more about:")
+    elif input() == 3:
+        item_Options(bullets , items)
+    else:
+        print("Choose one of the available options")
+        item_Options(bullets , items)
+
 
 """
 Function that tries to simulate simple AI: it sees how many bullets there are and calculates the best odds and plays using that information
@@ -150,6 +183,7 @@ def AIShoot(bullets , bullet) -> bool:
                 dead()
             elif playerLives == 1:
                 print(f"Ha ha! Be carefull now you only have {playerLives} last try")
+                return True
             else:
                 print(f"Got you! Now you only have {playerLives} lives left")
                 return True
@@ -181,4 +215,20 @@ def dead():
     print("As expected, you are dead! Feel free to try again, if you think you can do better...")
     exit()
 
+#From now on this functions are gonna be powers
+    
+"""
+Reverse bullet: The objective is to allow the player or the "ai" to reverse the bullet, for example, if they know the bullet is a blank they can turn it into a live bullet or vice-versa
+"""
+def reverse_bullet(bullet):
+    if bullet:                    #Implicit if bullet == True:
+        return False
+    else:                        
+        return True
+
+"""
+Kevlar: Allows the player to shield for the next turn without the "ai" knowing so and vice-versa
+"""
+def kevlar():
+ print("teste")
 main()
