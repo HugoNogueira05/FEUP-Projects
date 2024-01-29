@@ -21,6 +21,33 @@ Therefore the main mechanics are:
 As stated before the "AI" is nothing more than an algorithm that calculates odds based on knowledge that the player can also obtain it only counts the amount of blanks and real bullets and then calculates the odd of the next bullet being real.
 If the odd is 0.5 or above it chooses to shoot the player, else it chooses to shoot himself.
 After implementing powers the odds might change.
+### Current graph representing the program working:
+```mermaid
+flowchart TD
+    A[Main]-->B[PlayerShoot]
+    B-->C{Who does the player shoot?}
+    C-->|Himself and the bullet was a blank| D[Shoot again]
+    D-->B
+    C-->|The AI| E[AIShoot]
+    B-->|Already shot 2 times| F[Game]
+    E-->F
+    F-->G[Reload]
+    G-->|Print the number and type of bullets in the Chamber| H>get_Input]
+    H-->|If the user wants to see his items| I[item_Options]
+    H-->|If the user wants to shoot himself| J[PlayerShoot]
+    J-->L{Is the bullet blank?}
+    L-->|Yes| H
+    L-->|No| test3{Is the player dead?}
+    H-->|If the user wants to shoot the AI| M[PlayerShoot]
+    I-->H
+    M-->test3
+    test3-->|No| test4{Is the AI dead?}
+    test4-->|No| K[AIShoot]
+    K-->H
+    test4-->|Yes| win{Win}
+    test3-->|Yes| loss[Dead]
+
+```
 # Development Roadmap
 ## Version 1.0
 1. Added Core Mechanics 
