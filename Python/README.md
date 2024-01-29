@@ -37,18 +37,15 @@ flowchart TD
     H-->|If the user wants to shoot himself| J[PlayerShoot]
     J-->L{Is the bullet blank?}
     L-->|Yes| H
-    L-->|No| K[AIShoot] & test3{Is the player dead?}
+    L-->|No| test3{Is the player dead?}
     H-->|If the user wants to shoot the AI| M[PlayerShoot]
-    M-->K
-    J-->H
-    K-->H
     I-->H
     M-->test3
-    K-->test3
-    test3-->|Yes| loss[Dead]
     test3-->|No| test4{Is the AI dead?}
+    test4-->|No| K[AIShoot]
+    K-->H
     test4-->|Yes| win{Win}
-    test4-->|No| H
+    test3-->|Yes| loss[Dead]
 
 ```
 # Development Roadmap
