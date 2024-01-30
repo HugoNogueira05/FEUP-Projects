@@ -63,6 +63,11 @@ flowchart TD
 4. Fixed bug related to who plays when AI was 1 HP
 5. Removed the raise exception when there was a wrong input, now you don't need to restart the entire game
 6. Remade the game function so that everytime the weapon reloads tu turn remains the same instead of it being always the player's turn (that was unfair)
+## Version 1.3
+1. Remade the random bullet loading system to better fit into the items logic
+2. Created edge-case protection in the Items menu
+3. Created the reverse bullet item
+4. Created a new system inside the reload function that also adds 1 random item to the players inventory
 ## Development Objectives
 - [x] Creating Main mechanics
 - [x] Fixing outputs
