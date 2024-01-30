@@ -80,10 +80,11 @@ Loop that runs while neither the player nor the "AI" dies. In the beginning of e
 """
 def Game(turn) -> None:
     global running
-    items = {"reverse" : 1, "kevlar" : 0 , "wish" : 0}
+    items = {"reverse" : 0, "kevlar" : 0 , "wish" : 0}
     while running:
-        bullets = Reload()
+        bullets, items = Reload(items)
         print(f"There are {bullets.count(True)} real bullets and {bullets.count(False)} blanks")
+        print(f"You now have {items}")
         time.sleep(1)
         if turn:
             print("Go ahead and take the shot")
@@ -98,15 +99,18 @@ def Game(turn) -> None:
 """
 This function increments the amount of bullets by one while also making sure that there is always 1 live and 1 blank otherwise there would be cases where it would be a free round
 """
-def Reload() -> list[bool]:
+def Reload(items) -> list[bool]:
     global runs
     bullets = []
+    possibleItems = ["reverse", "kevlar" , "wish"]
     runs +=1
+    item = possibleItems[random.randint(0, len(possibleItems)-1)]
+    items[item] += 1
     blanks = [False for x in range(random.randint(1, runs+1))]
     realBullets = [True for x in range(runs + 2 -len(blanks))]
     bullets = blanks + realBullets
     random.shuffle(bullets)
-    return bullets
+    return (bullets , items)
 
 """
 This function gets the user's input and filters it to the correct function after:
@@ -120,9 +124,9 @@ def get_Input(bullets , items = {}) -> bool:
     elif userInput.upper() == "YOU":
         turn = PlayerShoot(bullets.pop(0) , "ai")
     elif userInput.upper() == "ITEMS":
-        item_Options(bullets , items)
+        turn = item_Options(bullets , items)
     else:
-        get_Input(bullets)
+        turn = get_Input(bullets)
     return turn
     
 #Ideia é os items serem um dicionário em q a key é o nome do item e o valor associado é o número de uses que tens se for 0 , erro, senão baixa 1 
@@ -137,27 +141,27 @@ def item_Options(bullets , items):
                 items[itemPicked] -= 1
                 if itemPicked == "reverse":
                     bullets[0] = reverse_bullet(bullets[0])
-                    get_Input(bullets, items)
+                    return get_Input(bullets, items)
             else:
                 print("You don't have that item at your disposal")
-                get_Input(bullets, items)
+                return get_Input(bullets, items)
         else:
             print("Choose one of the available items")
-            item_Options(bullets , items)
+            return item_Options(bullets , items)
     elif playerInput == "2":
         itemPicked = input("Please indicate the name of the item you want to learn more about:")
         if itemPicked in items.keys():
             if itemPicked == "reverse":
                 reverse_bullet(bullets[0] , True)
-                get_Input(bullets, items)
+                return get_Input(bullets, items)
         else:
             print("Choose one of the existing items")
-            item_Options(bullets, items)
+            return item_Options(bullets, items)
     elif playerInput == "3":
-        get_Input(bullets , items)
+        return get_Input(bullets , items)
     else:
         print("Choose one of the available options")
-        item_Options(bullets , items)
+        return item_Options(bullets , items)
 
 
 """
@@ -243,6 +247,7 @@ def reverse_bullet(bullet , info = False):
 """
 Kevlar: Allows the player to shield for the next turn without the "ai" knowing so and vice-versa
 """
-def kevlar():
- print("teste")
+def kevlar(info = False):
+    if info:
+        print("This item will shield you for the next real shot")
 main()
