@@ -180,7 +180,7 @@ def item_Options(bullets , items, playerActives):
 Function that tries to simulate simple AI: it sees how many bullets there are and calculates the best odds and plays using that information
 Here since the system associates True with player's turn and False with AI's turn we swap what we did with the PlayerShoot() function
 """
-def AIShoot(bullets , bullet , AIitems , playerActives = [], aiActives = []) -> bool:
+def AIShoot(bullets , bullet , AIitems = dict(), playerActives = [], aiActives = []) -> bool:
     global playerLives , AILives , running
     print("---My turn---")
     time.sleep(2)
@@ -188,17 +188,17 @@ def AIShoot(bullets , bullet , AIitems , playerActives = [], aiActives = []) -> 
     blanks = bullets.count(False)
     real = bullets.count(True)
     if blanks == 0:
-        if random.randint(1,2) == 1 and AIitems["reverse"] > 0:
+        if random.randint(1,2) == 1 and AIitems.get("reverse") > 0:
             target = "ai"
             print("I choose to shoot myself")
-            reverse_bullet(bullet)
+            bullet = reverse_bullet(bullet)
         else:
             target = "player"
     elif real == 0:
-        if random.randint(1,2) == 1 and AIitems["reverse"] > 0:
+        if random.randint(1,2) == 1 and AIitems.get("reverse") > 0:
             target = "player"
             print("I choose to shoot you")
-            reverse_bullet(bullet)
+            bullet = reverse_bullet(bullet)
         else:
             target = "ai"
             print("I choose to shoot myself")
@@ -275,10 +275,12 @@ def dead():
 Reverse bullet: The objective is to allow the player or the "ai" to reverse the bullet, for example, if they know the bullet is a blank they can turn it into a live bullet or vice-versa
 """
 def reverse_bullet(bullet , info = False) -> bool:
-    if bullet and not info:                    #Implicit if bullet == True and info == False:
-        return False
-    elif not info:                        
-        return True
+    if not info:
+        print("The bullet has been reversed")
+        if bullet and not info:                    #Implicit if bullet == True and info == False:
+            return False
+        elif not info:                        
+            return True
     else:
         print("Using this item will cause the next bullet in the chamber to be the opposite of what it originally was.")
         print("If a bullet was a blank it would become real and vice-versa")    
@@ -333,7 +335,8 @@ def insertBullet(items , caller , bullets , info = False):
                 print("You don't have a spare bullet")
                 return bullets
             items.pop("insert")
-            return random.shuffle(bullets)
+            random.shuffle(bullets)
+            return bullets
         # if caller == "AI":
         #     if True in aiActives:
         #         bullets.append(True)
