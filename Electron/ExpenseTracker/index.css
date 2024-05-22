@@ -1,0 +1,12 @@
+html{
+    background-color: #25282A;
+}
+#Header{
+    color:aliceblue;
+    text-align: center;
+    margin-top: 45%;
+    border: 1px solid red;
+    transition: transform 0.5s ease-in , opacity 0.5s ease-in;
+    scale: 0;
+    opacity: 0;
+}
