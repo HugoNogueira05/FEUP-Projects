@@ -68,12 +68,17 @@ flowchart TD
 2. Created edge-case protection in the Items menu
 3. Created the reverse bullet item
 4. Created a new system inside the reload function that also adds 1 random item to the players inventory
+## Version 1.4 (May be the final version)
+1. Nerfed the kevlar to be more strategic and balanced (now you are only protected untill the weapon reloads).
+2. Added the "pop" power that removes one bullet, adds it to your inventory and then you can use it later on another round.
+3. Gave the "AI" the ability to use powers.
+4. Created new auxiliary functions to ensure that the code is readable.
 ## Development Objectives
 - [x] Creating Main mechanics
 - [x] Fixing outputs
 - [X] Improving inputs
-- [ ] Improving "AI"
-- [ ] Adding powers
+- [X] Improving "AI"
+- [X] Adding powers
 - [ ] Creating levels
 # How to run:
 > [!IMPORTANT]
