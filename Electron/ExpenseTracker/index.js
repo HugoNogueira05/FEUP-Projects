@@ -38,3 +38,13 @@ function ClearBalance(){
 function displayBalance(){
      document.getElementById("BalanceTab").style.display = 'flex';
 }
+
+function ChangeShape(){
+    let SideBar = document.getElementById("SideBar");
+    if (SideBar.style.width == '0px'){
+        SideBar.style.width = '30vh';
+    }
+    else{
+        SideBar.style.width = '0px';
+    }
+}
