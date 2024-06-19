@@ -8,13 +8,20 @@
   </head>
   <body onload="InitializeMain()">
     <div id = "Header">
-      <h2>Expense Tracker</h2>
+      <h2 id = "HeaderText">Expense Tracker</h2>
     </div>
-    <div id = "teste">
-      <input type="text" id="ExpenseValue" placeholder="Expense Value">
-      <button id = "AddExpense" onclick="AddExpense()">Add Expense</button>
+    <div id = "BalanceTab">
+      <div id="Expenses">
+        <input type="text" id="ExpenseValue" placeholder="Expense Value">
+        <button id = "AddExpense" onclick="AddExpense()">Add Expense</button>
+      </div>
+      <div id="Income">
+        <input type="text" id="IncomeValue" placeholder="Income Value">
+        <button id = "AddIncome" onclick="AddIncome()">Add Income</button>
+      <button id = "Clear" onclick = "ClearBalance()">Clear Balance</button>
       <output id = "Balance">Total Balance: </output>
     </div>
+
     <script src = "index.js"></script>
   </body>
 </html>

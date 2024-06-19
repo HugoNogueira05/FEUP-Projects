@@ -1,11 +1,62 @@
-html{
+html , body{
     background-color: #25282A;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
 }
-#Header{
-    color:aliceblue;
-    text-align: center;
-    margin-top: 45%;
-    transition: transform 0.5s ease-in , opacity 0.5s ease-in;
+@keyframes moveText {
+    0% {
+        transform: scale(0.2);
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+    }
+    100% {
+        transform: scale(1);
+        top: 0;
+        left: 1%;
+        transform: translate(0, 0);
+    }
+}
+
+#Header {
+    color: aliceblue;
+    transition: 0.5s ease-in;
+    position: absolute;
+    display: flex;
     transform : scale(0);
-    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    animation: moveText 2s forwards;
+}
+
+#HeaderText {
+    transition: 0.5s ease-in;
+}
+
+
+#BalanceTab{
+    display: none;
+    justify-content: space-between;
+}
+
+#BalanceTab button{
+    background-color: #4CAF50; /* Green background */
+    border: none; /* No border */
+    color: white; /* White text */
+    padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* No underline */
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer; /* Mouse pointer on hover */
+    transition-duration: 0.4s; /* Transition effect */
+}
+
+#BalanceTab button:hover {
+    background-color: #45a049; /* Darker green on hover */
 }
