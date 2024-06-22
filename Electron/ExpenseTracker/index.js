@@ -1,5 +1,5 @@
-let transactionArr = [];
-
+let transactionHist = "";
+let symbol = "€";
 function InitializeMain(){
     let Header = document.getElementById("Header");
     Header.style.transform = 'scale(1)';
@@ -9,11 +9,18 @@ function InitializeMain(){
     }
     UpdateBalance();
     displayBalance();
-    if (localStorage.getItem("TransactionArr").length > 0){
-        let transactionArrCop = JSON.parse(localStorage.getItem("TransactionArr"));
-        transactionArrCop.forEach(transaction => {
-            AddToHistory(transaction[0], transaction[1], transaction[2], transaction[3]);
-        });
+    
+    transactionHist = localStorage.getItem("TransactionHist");
+    if (transactionHist && transactionHist.length > 0){
+        let transactions = transactionHist.split("_"); 
+         // Iterate over the transactions array to process each value
+        for (let i = 1; i < transactions.length; i+=4) {
+            AddToHistory(transactions[i], transactions[i+1], transactions[i+2], transactions[i+3]);
+        }
+    }
+    else{
+        transactionHist = "";
+        console.log("No History");
     }
 }
 function AddIncome(){
@@ -22,8 +29,8 @@ function AddIncome(){
         localStorage.setItem("Balance" , parseFloat(localStorage.getItem("Balance")) + parseFloat(income));
         UpdateBalance();
         AddToHistory(income, 0, "Income", new Date().getDate() + "/" + (parseInt(new Date().getMonth()) + 1) + "/" + new Date().getFullYear());
-        transactionArr.push(income, 0, "Income", new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear());
-        localStorage.setItem("TransactionArr", JSON.stringify(transactionArr));
+        transactionHist += "_" + income + "_" + 0 + "_" + "Income" + "_" + new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
+        localStorage.setItem("TransactionHist" , transactionHist);
     }
 }
 function AddExpense(){
@@ -32,15 +39,15 @@ function AddExpense(){
         localStorage.setItem("Balance" , parseFloat(localStorage.getItem("Balance")) - parseFloat(expense));
         UpdateBalance();
         AddToHistory(expense, 1, "description", new Date().getDate() + "/" + (parseInt(new Date().getMonth()) + 1) + "/" + new Date().getFullYear());
-        transactionArr.push(expense, 1, "description", new Date().getDate() + "/" + (parseInt(new Date().getMonth()) + 1) + "/" + new Date().getFullYear());
-        localStorage.setItem("TransactionArr", JSON.stringify(transactionArr));
+        transactionHist += "_" + expense + "_" +  1 + "_" +  "description" + "_" +   new Date().getDate() + "/" + (parseInt(new Date().getMonth()) + 1) + "/" + new Date().getFullYear();
+        localStorage.setItem("TransactionHist" , transactionHist);
     }
 }
 
 function UpdateBalance(){
     let Balance = localStorage.getItem("Balance");
     let BalanceValue = document.getElementById("Balance");
-    BalanceValue.textContent = "Total Balance: " + Balance;
+    BalanceValue.textContent = Balance + " " + symbol;
 }
 
 function ClearBalance(){
@@ -106,8 +113,7 @@ function AddToHistory(value, type, description, date) {
 function ClearHistory(){
     let transactionList = document.getElementById("TransactionList");
     while (transactionList.rows.length > 0) {
-        transactionList.deleteRow(1);
+        transactionList.deleteRow(0);
     }
-    transactionArr = [];
-    localStorage.setItem("TransactionArr", JSON.stringify(transactionArr));	
+    localStorage.setItem("TransactionHist", "");	
 }

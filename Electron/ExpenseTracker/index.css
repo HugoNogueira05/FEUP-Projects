@@ -109,3 +109,43 @@ html , body{
     display: none;
     justify-content: space-between;
 }
+
+#BalanceCard {
+    position: relative; /* Ensure this is set to position children absolutely within it */
+    left: 50%;
+    top: -25vh;
+    transform: translateX(-50%);
+    background-color: #f0f0f0;
+    border-radius: 2vw;
+    box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.1);
+    padding: 2vh 2vw;
+    width: 40vw;
+    max-width: 1000px;
+    height: auto;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.3rem;
+    color: rgb(30, 30, 30);
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: bold;
+}
+
+#BalanceCard h4 {
+    position: absolute; /* Position h4 absolutely within #BalanceCard */
+    top: 2%; /* Align to the top */
+    left: 2%; /* Align to the left */
+    font-size: 1.5rem;;
+    font-weight: bold;
+    margin: 1vh 1vw; /* Add some margin to not stick to the very edge */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    #BalanceCard {
+        width: 90vw; /* Increase width on smaller screens for better visibility */
+        padding: 4vh 4vw; /* Increase padding on smaller screens for better spacing */
+        border-radius: 5vw; /* Increase border radius for a more rounded look on small screens */
+    }
+}
