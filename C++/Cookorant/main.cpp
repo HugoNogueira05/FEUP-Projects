@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "parseDoc.cpp"
 using namespace std;
 
 // The idea is to use questions to get a playstyle as well as some key agents needed, then we can exclude and evaluate which score is higher
@@ -12,6 +13,7 @@ void convert(string& word);
 
 
 int main(){
+    vector<Agent> dataVec ;
     int playstyleVal = 0 , minAggroScore = 0 , minControlScore = 0 , minMidScore = 0;
     playstyleVal = detectPlaystyle();
     //Define the base values to finally create the comp
@@ -48,10 +50,14 @@ int main(){
             cout << "There appears to be an error when calculating your playstyle please try again.\n";
             return 0;
     }
+    cout << minAggroScore << " " << minControlScore << " " << minMidScore << endl;
+    dataVec = parseFile("agents.txt");
+    for (Agent agente : dataVec){
+        cout << agente.getName() << endl;
+    }
 
-
-    
     return 0;
+    
 }
 
 // Auxiliary functions
