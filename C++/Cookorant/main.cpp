@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "createComp.cpp"
 #include "parseDoc.cpp"
 using namespace std;
 
@@ -11,46 +12,46 @@ using namespace std;
 int detectPlaystyle(int playstyle = 0);
 void convert(string& word);
 
-
 int main(){
     vector<Agent> dataVec ;
-    int playstyleVal = 0 , minAggroScore = 0 , minControlScore = 0 , minMidScore = 0;
+    int playstyleVal = 0;
     playstyleVal = detectPlaystyle();
+    struct restrictions scores;
     //Define the base values to finally create the comp
     //This could be implemented in an auxiliary function if needed
     switch (playstyleVal){
         case 12:
-            minControlScore = 10;
-            minAggroScore = 15;
+            scores.minControlScore = 10;
+            scores.minAggroScore = 15;
             break;
         case 13:
-            minMidScore = 10;
+            scores.minMidScore = 10;
         case 10:
-            minAggroScore = 15;
+            scores.minAggroScore = 15;
             break;
         case 21:
-            minAggroScore = 10;
-            minControlScore = 15;
+            scores.minAggroScore = 10;
+            scores.minControlScore = 15;
             break;
         case 23:
-            minMidScore = 10;
+            scores.minMidScore = 10;
         case 20:
-            minControlScore = 15;
+            scores.minControlScore = 15;
             break;
         case 31:
-            minAggroScore = 10;
-            minMidScore = 15;
+            scores.minAggroScore = 10;
+            scores.minMidScore = 15;
             break;
         case 32:
-            minControlScore = 10;
+            scores.minControlScore = 10;
         case 30:
-            minMidScore = 15;
+            scores.minMidScore = 15;
             break;
         default:
             cout << "There appears to be an error when calculating your playstyle please try again.\n";
             return 0;
     }
-    cout << minAggroScore << " " << minControlScore << " " << minMidScore << endl;
+    cout << scores.minAggroScore << " " << scores.minControlScore << " " << scores.minMidScore << endl;
     dataVec = parseFile("agents.txt");
     for (Agent agente : dataVec){
         cout << agente.getName() << endl;
