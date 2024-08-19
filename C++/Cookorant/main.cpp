@@ -1,20 +1,25 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <string_view> 
 #include "createComp.cpp"
 #include "parseDoc.cpp"
 using namespace std;
 
 // The idea is to use questions to get a playstyle as well as some key agents needed, then we can exclude and evaluate which score is higher
+// Missing : implement the main restrictions inside the createComp function
 
 
 // Auxiliary Function definition
 int detectPlaystyle(int playstyle = 0);
 void convert(string& word);
+vector<bool> specificParam(string fileName);
+
 
 int main(){
-    vector<Agent> dataVec ;
-    int playstyleVal = 0;
+    vector<Agent> dataVec;
+    vector<bool> answersVec;
+    int playstyleVal = 0; 
     playstyleVal = detectPlaystyle();
     struct restrictions scores;
     //Define the base values to finally create the comp
@@ -51,12 +56,10 @@ int main(){
             cout << "There appears to be an error when calculating your playstyle please try again.\n";
             return 0;
     }
-    cout << scores.minAggroScore << " " << scores.minControlScore << " " << scores.minMidScore << endl;
     dataVec = parseFile("agents.txt");
-    for (Agent agente : dataVec){
-        cout << agente.getName() << endl;
-    }
-
+    answersVec = specificParam("questions.txt");
+    string temp = createComp(dataVec , scores , answersVec);
+    cout << temp << endl;
     return 0;
     
 }
@@ -166,3 +169,30 @@ int detectPlaystyle(int playstyle){
     return playstyle;
 }
 
+vector<bool> specificParam(string fileName){
+    vector<bool> answers;
+    ifstream input(fileName);
+    string line , number , answer;
+    while (getline(input , line)){
+        string c = line.substr(0 , 1);
+        if (c == "A" || c == " "){
+            continue;
+        }
+        else{
+            cout << line << endl;
+            cin >> answer;
+            if (answer == "yes" || answer == "Yes" || answer == "y" || answer == "Y"){
+                answers.push_back(true);
+            }
+            else if(answer == "no" || answer == "No" || answer == "N" || answer == "n"){
+                answers.push_back(false);
+            }
+            else{
+                cout <<" please answer with Yes or No" << endl;
+                return specificParam(fileName);
+            }
+        }
+    }
+    return answers;
+
+}

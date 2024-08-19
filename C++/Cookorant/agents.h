@@ -2,6 +2,7 @@
 #define AGENTS_H
 #include <string>
 #include <utility>
+#include <vector>
 using namespace std;
 
 class Agent{
@@ -11,6 +12,7 @@ class Agent{
         int getAggro() const {return AggroPoints;}
         int getMid() const {return MidRangePoints;}
         int getControl() const {return ControlPoints;}
+        vector<pair<int , int>> getValueGroup() const{return answerVals;}
         void PrintValueGroup() const {for (pair<int , int> value: answerVals){cout << value.first << " " << value.second << " / ";}}
     private:
         string name;
