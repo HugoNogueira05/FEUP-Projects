@@ -14,9 +14,15 @@ class Agent{
         int getControl() const {return ControlPoints;}
         vector<pair<int , int>> getValueGroup() const{return answerVals;}
         void PrintValueGroup() const {for (pair<int , int> value: answerVals){cout << value.first << " " << value.second << " / ";}}
+        int getScore() const {return score;}
+        void setScore( int val) { score = val;}
+
+         bool operator<(const Agent& other) const {
+        return this->AggroPoints < other.getAggro();
+         }
     private:
         string name;
-        int AggroPoints , MidRangePoints , ControlPoints;
+        int AggroPoints , MidRangePoints , ControlPoints , score = 0;
         vector <pair <int , int>> answerVals;
 
 };

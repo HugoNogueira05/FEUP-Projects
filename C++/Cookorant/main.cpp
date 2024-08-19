@@ -58,7 +58,8 @@ int main(){
     }
     dataVec = parseFile("agents.txt");
     answersVec = specificParam("questions.txt");
-    string temp = createComp(dataVec , scores , answersVec);
+    vector<set<Agent>> possibleCombinations = possibleComps(scores , dataVec);
+    string temp = createComp(dataVec , possibleCombinations , answersVec , scores);
     cout << temp << endl;
     return 0;
     
@@ -175,7 +176,7 @@ vector<bool> specificParam(string fileName){
     string line , number , answer;
     while (getline(input , line)){
         string c = line.substr(0 , 1);
-        if (c == "A" || c == " "){
+        if (c == "A" || c == " " || c == "/"){
             continue;
         }
         else{
@@ -194,5 +195,4 @@ vector<bool> specificParam(string fileName){
         }
     }
     return answers;
-
 }
