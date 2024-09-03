@@ -1,0 +1,14 @@
+1  When doing site execs / retakes / taking intermediate space, is the ANGLE DENSITY high?
+2  When doing site execs / retakes / taking intermediate space, is the JIGGLEABLE ANGLE DENSITY high?
+3  When doing site execs / retakes / taking intermediate space, is ZONE CATALYTIC UTIL required?
+4  Is the rotation time long? (Yes = 12+ Seconds)
+5  Do we need PLANT INSULATION?
+6  Do we need DEFUSE DENIAL?
+7  Does the map require LARGE SMOKES?
+8  When doing site execs, are SLICES required?
+9  Are SLICES good to create lurking opportunites / constant LOS DENIAL? 
+10 How many sites does the map have?
+11 Do we need VERTICALITY?
+12 Are there any sites which retaking is somewhat high EV?
+13  Does the map have great OP lines?
+14 Are there good one-ways on the map? (Yes = 5+)

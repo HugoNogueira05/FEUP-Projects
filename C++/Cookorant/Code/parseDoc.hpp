@@ -6,7 +6,11 @@
 #include "agents.h"
 using namespace std;
 
-int stringToInt(string str){
+
+//Function to convert a string to an integer -> Only works for strings that are integers
+// In retrospective I could have just used Stoi but I didn't remember at the time and now it's done
+
+inline int stringToInt(string str){
     int sum = 0;
     for(char c : str){
         sum = sum + c - 48; // 48 is the decimal for 0 in ascii
@@ -15,7 +19,13 @@ int stringToInt(string str){
     return sum / 10;
 }
 
-vector<Agent> parseFile(string fileName){
+/**
+ * @brief Function to read the agents file and return a vector of agents
+ * 
+ * @param fileName string containing the name of the file to be read
+ * @return vector<Agent> vector containing all the agents
+ */
+inline vector<Agent> parseFile(string fileName){
     vector <Agent> agentArr;
     vector <pair<int , int>> valueGroup;
     ifstream input(fileName);
@@ -50,7 +60,7 @@ vector<Agent> parseFile(string fileName){
                         continue;
                     }
                 }
-                agentArr.push_back(Agent(name , aggro , mid , control, valueGroup));
+                agentArr.push_back(Agent(name , aggro , control , mid, valueGroup));
             }
         }
     }
